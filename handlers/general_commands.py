@@ -1,4 +1,5 @@
-from config.general_texts import help_text
+import json
+
 from misc import dp, bot
 from aiogram.types import Message
 
@@ -7,7 +8,9 @@ from aiogram.types import Message
     commands='help'
 )
 async def help(message: Message):
-    await bot.send_message(chat_id=message.from_user.id, text=help_text)
+    print('id: ', message.chat.id)
+    print('name: ', json.loads(str(message.pin)[38:-2]).get('reply_to_message').get('forum_topic_created').get('name'))
+    await message.delete()
 
 
 
