@@ -38,6 +38,11 @@ async def filters(message: Message):
         if i.lower() in bad_expression:
             await message.delete()
             await bot.send_message(text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения', chat_id=message.from_user.id)
+        elif message.text.lower() in bad_expression:
+            await message.delete()
+            await bot.send_message(
+                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
+                chat_id=message.from_user.id)
 
     if json.loads(str(message.pin)[38:-2]).get('reply_to_message').get('forum_topic_created').get(
             'name') == 'Отзывы':
