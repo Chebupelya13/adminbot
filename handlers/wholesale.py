@@ -37,7 +37,7 @@ async def filters(message: Message):
 
         if i.lower() in bad_expression:
             await message.delete()
-            await bot.send_message(f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения', chat_id=message.from_user.id)
+            await bot.send_message(text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения', chat_id=message.from_user.id)
 
     if json.loads(str(message.pin)[38:-2]).get('reply_to_message').get('forum_topic_created').get(
             'name') == 'Отзывы':
@@ -50,7 +50,7 @@ async def filters(message: Message):
             items_kz.next()
             await message.delete()
             await bot.send_message(
-                f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
+                text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
                 chat_id=message.from_user.id
             )
 
@@ -58,7 +58,7 @@ async def filters(message: Message):
             if 'http' in message.text:
                 await message.delete()
                 await bot.send_message(
-                    f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
+                    text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
                     chat_id=message.from_user.id
                 )
 
@@ -69,6 +69,6 @@ async def filters(message: Message):
                 else:
                     await message.delete()
                     await bot.send_message(
-                        f'{message.from_user.full_name}, пожалуйста ознакомтесь с правилами размещения объявлений.',
+                        text=f'{message.from_user.full_name}, пожалуйста ознакомтесь с правилами размещения объявлений.',
                         chat_id=message.from_user.id
                     )
