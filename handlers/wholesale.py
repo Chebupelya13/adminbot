@@ -37,12 +37,19 @@ async def filters(message: Message):
 
         if i.lower() in bad_expression:
             await message.delete()
-            await bot.send_message(text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения', chat_id=message.from_user.id)
+            try:
+                await bot.send_message(text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения', chat_id=message.from_user.id)
+            except:
+                await message.answer(text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
+
         elif message.text.lower() in bad_expression:
             await message.delete()
-            await bot.send_message(
+            try:
+                await bot.send_message(
                 text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
                 chat_id=message.from_user.id)
+            except:
+                await message.answer(text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
 
     if json.loads(str(message.pin)[38:-2]).get('reply_to_message').get('forum_topic_created').get(
             'name') == 'Отзывы':
@@ -54,18 +61,24 @@ async def filters(message: Message):
             items.next()
             items_kz.next()
             await message.delete()
-            await bot.send_message(
+            try:
+                await bot.send_message(
                 text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
                 chat_id=message.from_user.id
             )
+            except:
+                await message.answer(text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки')
 
         except:
             if 'http' in message.text:
                 await message.delete()
-                await bot.send_message(
-                    text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
-                    chat_id=message.from_user.id
-                )
+                try:
+                    await bot.send_message(
+                        text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки\n',
+                        chat_id=message.from_user.id
+                    )
+                except:
+                    await message.answer( text=f'{message.from_user.full_name}, в этом чате нельзя отправлять номера телефонов и ссылки')
 
             else:
                 res = await post_counter(message)
@@ -73,7 +86,10 @@ async def filters(message: Message):
                     pass
                 else:
                     await message.delete()
-                    await bot.send_message(
-                        text=f'{message.from_user.full_name}, пожалуйста ознакомтесь с правилами размещения объявлений.',
-                        chat_id=message.from_user.id
-                    )
+                    try:
+                        await bot.send_message(
+                            text=f'{message.from_user.full_name}, пожалуйста ознакомтесь с правилами размещения объявлений.',
+                            chat_id=message.from_user.id
+                        )
+                    except:
+                        await message.answer(text=f'{message.from_user.full_name}, пожалуйста ознакомтесь с правилами размещения объявлений.')
