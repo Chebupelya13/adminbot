@@ -13,6 +13,50 @@ from config.config import SUPER_GROUP, SUPER_USERS
 )
 async def filters(message: Message):
     if message.from_user.id not in SUPER_USERS:
+        if len(message.photo) == 0:
+            for i in message.text.split(' '):
+
+                if i.lower() in bad_expression:
+                    await message.delete()
+                    try:
+                        await bot.send_message(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
+                            chat_id=message.from_user.id)
+                    except:
+                        await message.answer(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
+
+                elif message.text.lower() in bad_expression:
+                    await message.delete()
+                    try:
+                        await bot.send_message(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
+                            chat_id=message.from_user.id)
+                    except:
+                        await message.answer(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
+        else:
+            for i in message.caption.split(' '):
+
+                if i.lower() in bad_expression:
+                    await message.delete()
+                    try:
+                        await bot.send_message(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
+                            chat_id=message.from_user.id)
+                    except:
+                        await message.answer(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
+
+                elif message.caption.lower() in bad_expression:
+                    await message.delete()
+                    try:
+                        await bot.send_message(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
+                            chat_id=message.from_user.id)
+                    except:
+                        await message.answer(
+                            text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
         if json.loads(str(message.pin)[38:-2]).get('reply_to_message').get('forum_topic_created').get('name') == 'Отзывы':
 
             res = await post_counter(message)
@@ -134,51 +178,7 @@ async def filters(message: Message):
 
 
 
-        else:
-            if len(message.photo) == 0:
-                for i in message.text.split(' '):
 
-                    if i.lower() in bad_expression:
-                        await message.delete()
-                        try:
-                            await bot.send_message(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
-                                chat_id=message.from_user.id)
-                        except:
-                            await message.answer(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
-
-                    elif message.text.lower() in bad_expression:
-                        await message.delete()
-                        try:
-                            await bot.send_message(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
-                                chat_id=message.from_user.id)
-                        except:
-                            await message.answer(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
-            else:
-                for i in message.caption.split(' '):
-
-                    if i.lower() in bad_expression:
-                        await message.delete()
-                        try:
-                            await bot.send_message(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
-                                chat_id=message.from_user.id)
-                        except:
-                            await message.answer(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
-
-                    elif message.caption.lower() in bad_expression:
-                        await message.delete()
-                        try:
-                            await bot.send_message(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения',
-                                chat_id=message.from_user.id)
-                        except:
-                            await message.answer(
-                                text=f'{message.from_user.full_name}, в этом чате запрещено употреблять такие выражения')
 
     else:
         pass
